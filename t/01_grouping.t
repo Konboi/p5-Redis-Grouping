@@ -34,25 +34,37 @@ subtest 'grouping' => sub {
         version => 'version',
     });
 
-    my @group = $g->get_member({rank => 1});
-    is scalar @group, 2;
-    ok cmp_deeply(\@group, bag('sample1', 'sample2'));
+    $g->set_member('sample4', {
+        rank    => 1,
+        version => 'version2',
+    });
 
-    @group = $g->get_member({version => 'version'});
-    is scalar @group, 2;
-    ok cmp_deeply(\@group, bag('sample1', 'sample3'));
+    my @members = $g->get_member({rank => 1});
+    is scalar @members, 3;
+    ok cmp_deeply(\@members, bag('sample1', 'sample2', 'sample4'));
 
-    @group = $g->get_member({
+    @members = $g->get_member({version => 'version'});
+    is scalar @members, 2;
+    ok cmp_deeply(\@members, bag('sample1', 'sample3'));
+
+    @members = $g->get_member({
+        version => 'version2',
+        rank    => 1
+    });
+    is scalar @members, 2;
+    ok cmp_deeply(\@members, bag('sample2', 'sample4'));
+
+    @members = $g->get_member({
         rank    => 2,
         version => 'version'
     });
-    is scalar @group, 1;
-    ok cmp_deeply(\@group, bag('sample3'));
+    is scalar @members, 1;
+    ok cmp_deeply(\@members, bag('sample3'));
 
     $g->remove_member('sample3');
-    @group = $g->get_member({version => 'version'});
-    is scalar @group, 1;
-    ok cmp_deeply(\@group, bag('sample1'));
+    @members = $g->get_member({version => 'version'});
+    is scalar @members, 1;
+    ok cmp_deeply(\@members, bag('sample1'));
 
 };
 
