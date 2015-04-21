@@ -69,7 +69,7 @@ __END__
 
 =head1 NAME
 
-Redis::Grouping - grouping usign Redis
+Redis::Grouping - grouping using Redis
 
 =head1 SYNOPSIS
 

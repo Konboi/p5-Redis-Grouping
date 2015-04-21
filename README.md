@@ -1,6 +1,6 @@
 # NAME
 
-Redis::Grouping - grouping usign Redis
+Redis::Grouping - grouping using Redis
 
 # SYNOPSIS
     use Redis;
