@@ -37,16 +37,16 @@ sub set_member {
 sub get_member {
     my ($self, $opt) = @_;
 
-    my @group;
+    my @members;
     my @keys;
     for my $k (keys %{$opt}) {
         my $get_key = $self->key . '_' . $k . '_' . $opt->{$k};
         push @keys, $get_key;
     }
 
-    @group = $self->redis->sinter(@keys);
+    @members = $self->redis->sinter(@keys);
 
-    return @group;
+    return @members;
 }
 
 sub remove_member {
