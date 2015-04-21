@@ -1,6 +1,6 @@
 # NAME
 
-Redis::Grouping - It's new $module
+Redis::Grouping - grouping usign Redis
 
 # SYNOPSIS
     use Redis;
@@ -39,7 +39,7 @@ Redis::Grouping is providing grouping list by using Redis's sorted set.
 
 __THIS IS A ALPHA QUALITY RELEASE. API MAY CHANGE WITHOUT NOTICE__.
 
-### `my $group = Redis::Grouping->new(%options)`
+#### `my $group = Redis::Grouping->new(%options)`
 
 Create a new leader board object. Options should be set in `%options`.
 
