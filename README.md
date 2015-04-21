@@ -10,7 +10,7 @@ Redis::Grouping - It's new $module
 
     my $group = Redis::Grouping->new(
         redis => $redis,
-        key   => 'group_board',
+        key   => 'sample-group',
     );
 
     $group->set_group('some-key', {
