@@ -24,27 +24,25 @@ no Mouse;
 sub set_member {
     my ($self, $key, $opt) = @_;
 
-    my $doc_key = $self->key . "_" . $key;
+    my $index_key = $self->key . "_" . $key;
     for my $k (keys %{$opt}) {
         my $set_key = $self->key . '_' . $k . '_' . $opt->{$k};
         $self->redis->sadd($set_key, $key);
 
         # for remove
-        $self->redis->rpush($doc_key, $set_key);
+        $self->redis->rpush($index_key, $set_key);
     }
 }
 
 sub get_member {
     my ($self, $opt) = @_;
 
-    my @members;
     my @keys;
     for my $k (keys %{$opt}) {
         my $get_key = $self->key . '_' . $k . '_' . $opt->{$k};
         push @keys, $get_key;
     }
-
-    @members = $self->redis->sinter(@keys);
+    my @members = $self->redis->sinter(@keys);
 
     return @members;
 }
@@ -52,9 +50,8 @@ sub get_member {
 sub remove_member {
     my ($self, $key) = @_;
 
-
-    my $doc_key = $self->key . "_" . $key;
-    my @keys = $self->redis->lrange($doc_key, 0, -1);
+    my $index_key = $self->key . "_" . $key;
+    my @keys = $self->redis->lrange($index_key, 0, -1);
 
     for my $k (@keys) {
         my $delete_key = $k;
