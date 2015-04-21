@@ -2,6 +2,8 @@
 
 Redis::Grouping - grouping using Redis
 
+[![Build Status](https://travis-ci.org/Konboi/p5-Redis-Grouping.svg?branch=master)](https://travis-ci.org/Konboi/p5-Redis-Grouping)
+
 # SYNOPSIS
     use Redis;
     use Redis::Grouping;
