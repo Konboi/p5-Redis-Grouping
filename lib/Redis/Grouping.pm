@@ -80,24 +80,24 @@ Redis::Grouping - grouping using Redis
         key   => 'sample-group',
     );
 
-    $group->set_group('some-key', {
+    $group->set_member('some-key', {
         rank    => 8,
         version => '1.1.0',
     });
 
-    $group->set_group('some-key2', {
+    $group->set_member('some-key2', {
         rank    => 6,
         version => '1.1.0',
     });
 
-    my @list = $group->get_gorup({rank => 8});
+    my @list = $group->get_member({rank => 8});
     # ('some-key')
 
-    @list = $group->get_group({version => '1.1.0'});
+    @list = $group->get_member({version => '1.1.0'});
     # ('some-key', 'some-key2')
 
-    $group->remove_group('some-key2');
-    @list = $group->get_group({version => '1.1.0'});
+    $group->remove_member('some-key2');
+    @list = $group->get_member({version => '1.1.0'});
     # ('some-key')
 
 
